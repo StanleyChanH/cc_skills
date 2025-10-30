@@ -66,31 +66,140 @@ cc_skills/
    cd cc_skills
    ```
 
-2. 导航到所需的技能目录：
+## 📦 安装方法
+
+有**两种方法**可以在 Claude 中使用这些技能：
+
+### 方法一：上传 ZIP 文件到 Claude（推荐）
+
+**适用场景：** 快速测试、一次性使用、或不想在本地修改文件时
+
+**步骤：**
+1. **下载所需技能的 ZIP 文件**：
+   - CrewAI：从仓库下载 `Crewai/crewai.zip`
+   - 可以直接从 GitHub 下载，或使用：
+     ```bash
+     # 如果已克隆仓库
+     cp Crewai/crewai.zip ~/Downloads/crewai.zip
+     ```
+
+2. **上传到 Claude**：
+   - 打开 Claude Code 或 Claude.ai
+   - 将 `.zip` 文件拖拽到聊天窗口中
+   - 或使用上传按钮/附加文件选项
+
+3. **使用技能**：
+   - Claude 会自动解压并加载技能
+   - 立即开始提问使用
+   - 示例："帮我创建一个用于数据分析的 CrewAI 代理"
+
+**优势：**
+- ✅ 无需本地文件设置
+- ✅ 上传后立即可用
+- ✅ 非常适合测试和探索
+- ✅ 无破坏本地文件的风险
+
+### 方法二：复制到 Claude 技能目录
+
+**适用场景：** 永久安装、频繁使用、自定义修改
+
+**步骤：**
+1. **定位 Claude 技能目录**：
    ```bash
-   cd Crewai/crewai
+   # 技能目录通常位于：
+   ~/.claude/skills/
    ```
 
-3. 在 Claude 中加载技能：
-   - 使用 `/skill` 命令加上技能名称
-   - 根据需要参考文档文件
+2. **复制技能文件夹**：
+   ```bash
+   # 如果技能目录不存在，创建它
+   mkdir -p ~/.claude/skills/
 
-### 使用技能
+   # 复制 CrewAI 技能
+   cp -r Crewai/crewai ~/.claude/skills/
+   ```
+
+3. **验证安装**：
+   ```bash
+   # 检查技能是否正确安装
+   ls ~/.claude/skills/crewai/
+   # 应该显示：SKILL.md, references/, assets/, scripts/
+   ```
+
+4. **使用技能**：
+   - 打开 Claude Code
+   - 直接使用技能名称：`/skill crewai`
+   - 或直接开始询问有关 CrewAI 的问题
+
+**优势：**
+- ✅ 永久安装
+- ✅ 在所有 Claude 会话中可用
+- ✅ 可以修改和自定义文件
+- ✅ 首次使用后加载更快
+- ✅ 安装后可离线工作
+
+## 🚀 使用技能
+
+### 使用 CrewAI 技能
+
+**基本使用示例：**
+```bash
+# 安装后，您可以询问：
+"帮我创建一个用于数据分析的多代理系统"
+"如何在 CrewAI 中定义任务？"
+"展示代理角色定义的示例"
+"工作流编排的最佳实践是什么？"
+```
+
+**访问文档：**
+- 技能包含 `references/` 中的全面文档
+- 询问 Claude"显示入门指南"或"参考 API 文档"
+- 所有示例和指南都可通过自然语言查询访问
+
+### 技能结构概览
 每个技能包含：
-- **SKILL.md**：包含使用说明的主要技能文件
+- **SKILL.md**：包含使用说明和元数据的主要技能文件
 - **references/**：从官方来源提取的完整文档
+  - `getting_started.md` - 介绍和基本概念
+  - `api.md` - 完整的 API 参考
+  - `guides.md` - 分步教程
+  - `advanced.md` - 高级模式和技巧
+  - `enterprise.md` - 企业部署和扩展
+  - `tools.md` - 可用工具和集成
 - **assets/**：模板、样板代码和示例
 - **scripts/**：自动化辅助工具
 
 ### 初学者指南
-1. 从 `getting_started.md` 参考文件开始
-2. 使用 SKILL.md 中的快速参考模式
-3. 探索 assets/ 目录中的示例
+1. **从方法一开始**（ZIP 上传）进行测试
+2. 使用 `getting_started.md` 参考文件了解基础概念
+3. 询问简单问题，如"什么是 CrewAI？"或"代理如何工作？"
+4. 探索 assets/ 目录中的示例
 
 ### 高级用户指南
-1. 深入研究 `advanced.md` 和 `api.md` 获取详细信息
-2. 查看 `enterprise.md` 了解部署模式
-3. 使用 scripts/ 中的自动化任务
+1. **使用方法二**（本地安装）获得永久访问
+2. 深入研究 `advanced.md` 和 `api.md` 获取详细信息
+3. 查看 `enterprise.md` 了解部署模式
+4. 使用 scripts/ 进行自动化任务
+5. 根据需要修改和自定义技能文件
+
+## 🔧 故障排除
+
+### ZIP 上传问题
+- **问题：** Claude 上传后无法识别技能
+- **解决方案：** 确保 ZIP 文件包含正确的结构，SKILL.md 在根目录
+- **替代方案：** 尝试解压 ZIP 并直接上传文件夹
+
+### 本地安装问题
+- **问题：** 在 ~/.claude/skills/ 中找不到技能
+- **解决方案：**
+  1. 验证目录路径：`ls ~/.claude/skills/`
+  2. 检查权限：`ls -la ~/.claude/skills/crewai/`
+  3. 确保 SKILL.md 存在：`test -f ~/.claude/skills/crewai/SKILL.md`
+
+### 性能问题
+- **问题：** 技能加载缓慢
+- **解决方案：** 大型文档文件（如这个 10MB 的 CrewAI 技能）可能需要时间来索引
+- **提示：** 在首次加载后给 Claude 几分钟时间处理文档
 
 ## 📊 技能信息
 
