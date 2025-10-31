@@ -35,6 +35,26 @@ Use this skill when working with CrewAI - a framework for building multi-agent A
 - `enterprise.md` - Enterprise deployment and scaling
 - `tools.md` - Available tools and integrations
 
+### [LangChain v1.0 (Alpha)](./LangChain/langchain/SKILL.md)
+**Version:** 1.0.0 Alpha
+**Generated:** October 31, 2025
+**Size:** ~25KB documentation
+
+Use this skill when working with LangChain v1.0 (Alpha) - the revolutionary framework representing a fundamental architectural shift from Chain-based orchestration to unified Agent architecture with LangGraph engine.
+
+**Features:**
+- Unified Agent architecture with `create_agent` entry point
+- Revolutionary shift from Chain-based orchestration to Agent-based development
+- LangGraph engine for powerful stateful, interruptible workflows
+- Enhanced streaming capabilities with `astream_events`
+- Production-ready design addressing previous "easy for prototype, hard for production" limitations
+- Comprehensive API documentation for v1.0 architecture
+
+**Documentation Structure:**
+- `core_components.md` - Core components and architectural changes
+- `getting_started.md` - Introduction to v1.0 concepts
+- `other.md` - Additional documentation and migration guides
+
 ## 📁 Repository Structure
 
 ```
@@ -51,6 +71,15 @@ cc_skills/
 │       │   ├── guides.md
 │       │   ├── tools.md
 │       │   └── ...
+│       ├── assets/              # Templates and examples
+│       └── scripts/             # Helper scripts
+├── LangChain/
+│   └── langchain/
+│       ├── SKILL.md              # Main skill file
+│       ├── references/           # v1.0 documentation
+│       │   ├── core_components.md
+│       │   ├── getting_started.md
+│       │   └── other.md
 │       ├── assets/              # Templates and examples
 │       └── scripts/             # Helper scripts
 ├── README.md                    # This file
@@ -77,10 +106,12 @@ There are **two methods** to use these skills with Claude:
 **Steps:**
 1. **Download the ZIP file** for your desired skill:
    - CrewAI: Download `Crewai/crewai.zip` from the repository
+   - LangChain v1.0: Download `LangChain/langchain.zip` from the repository
    - You can download it directly from GitHub or use:
      ```bash
      # If you have the repo cloned
      cp Crewai/crewai.zip ~/Downloads/crewai.zip
+     cp LangChain/langchain.zip ~/Downloads/langchain.zip
      ```
 
 2. **Upload to Claude:**
@@ -117,19 +148,25 @@ There are **two methods** to use these skills with Claude:
 
    # Copy the CrewAI skill
    cp -r Crewai/crewai ~/.claude/skills/
+
+   # Copy the LangChain v1.0 skill
+   cp -r LangChain/langchain ~/.claude/skills/
    ```
 
 3. **Verify installation:**
    ```bash
-   # Check if the skill is properly installed
+   # Check if the skills are properly installed
    ls ~/.claude/skills/crewai/
+   # Should show: SKILL.md, references/, assets/, scripts/
+
+   ls ~/.claude/skills/langchain/
    # Should show: SKILL.md, references/, assets/, scripts/
    ```
 
 4. **Use the skill:**
    - Open Claude Code
-   - Use the skill name directly: `/skill crewai`
-   - Or simply start asking questions about CrewAI
+   - Use the skill name directly: `/skill crewai` or `/skill langchain`
+   - Or simply start asking questions about CrewAI or LangChain v1.0
 
 **Advantages:**
 - ✅ Permanent installation
@@ -156,16 +193,29 @@ There are **two methods** to use these skills with Claude:
 - Ask Claude to "show me the getting started guide" or "reference the API documentation"
 - All examples and guides are available through natural language queries
 
+### With LangChain v1.0 Skill
+
+**Basic Usage Examples:**
+```bash
+# After installation, you can ask:
+"How do I use create_agent in LangChain v1.0?"
+"What's the difference between Chain and Agent architecture in v1.0?"
+"Show me examples of using LangGraph for stateful workflows"
+"How do I migrate from Chain-based to Agent-based development?"
+"What are the streaming capabilities with astream_events?"
+```
+
+**Accessing Documentation:**
+- The skill includes v1.0 specific documentation in `references/`
+- Ask Claude to "explain the unified Agent architecture" or "show me v1.0 migration guide"
+- All architectural changes and new features are covered through natural language queries
+
 ### Skill Structure Overview
 Each skill contains:
 - **SKILL.md**: Main skill file with usage instructions and metadata
 - **references/**: Complete documentation extracted from official sources
-  - `getting_started.md` - Introduction and basic concepts
-  - `api.md` - Complete API reference
-  - `guides.md` - Step-by-step tutorials
-  - `advanced.md` - Advanced patterns and techniques
-  - `enterprise.md` - Enterprise deployment and scaling
-  - `tools.md` - Available tools and integrations
+  - **CrewAI**: `getting_started.md`, `api.md`, `guides.md`, `advanced.md`, `enterprise.md`, `tools.md`
+  - **LangChain v1.0**: `core_components.md`, `getting_started.md`, `other.md`
 - **assets/**: Templates, boilerplate code, and examples
 - **scripts/**: Automation helpers
 
@@ -206,6 +256,7 @@ Each skill contains:
 | Skill | Version | Generated | Size | Status |
 |-------|---------|-----------|------|--------|
 | CrewAI | 1.0.0 | 2025-10-30 | ~10MB | ✅ Active |
+| LangChain v1.0 | 1.0.0 Alpha | 2025-10-31 | ~25KB | ✅ Active |
 
 ## 🔄 Updating Skills
 
@@ -245,6 +296,12 @@ This repository contains skills generated from official documentation. Each skil
 
 ## 📈 Version History
 
+### v1.1.0 (2025-10-31)
+- Added LangChain v1.0 (Alpha) skill
+- Updated repository structure
+- Enhanced documentation with architectural changes
+- Added unified Agent architecture support
+
 ### v1.0.0 (2025-10-30)
 - Initial release
 - CrewAI skill included
@@ -253,6 +310,6 @@ This repository contains skills generated from official documentation. Each skil
 
 ---
 
-**Last Updated:** October 30, 2025
+**Last Updated:** October 31, 2025
 **Repository Size:** ~10MB
-**Skills Count:** 1
+**Skills Count:** 2
